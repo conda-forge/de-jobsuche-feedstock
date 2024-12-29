@@ -6,21 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/de-jobsuche-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/de-jobsuche-{{ version }}.tar.gz
   sha256: 418074219cbcb3a29c0e60990aa783d3661e430c886480161edab26d114e9366
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - poetry
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - python-dateutil
     - urllib3 >=1.25.3
 
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bundesAPI/jobsuche-api
